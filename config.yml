@@ -1,0 +1,64 @@
+# ==== Cosmetics 1.1 ====
+# Spelers openen /cosmetics (permissie cosmetics.use). Staff gebruikt /cosadmin (permissie cosmetics.staff).
+# Cosmetics krijg je op twee manieren:
+#   1. Van staff, via /cosadmin of het staff-menu (wordt door de plugin onthouden).
+#   2. Via een rang in LuckPerms: cosmetics.crown.<naam>, cosmetics.hat.<naam>, cosmetics.kill.*, cosmetics.bow.*, cosmetics.*
+
+actief: true               # zet alle cosmetics voor iedereen aan of uit
+
+# Laat spelers in het menu ook zien wat ze nog NIET hebben (als vergrendeld item).
+toon-vergrendeld: false
+
+# Cosmetics die niemand kan gebruiken. Gebruik de sleutel uit /cosadmin lijst, bv. "hat:tnt".
+uitgeschakeld: []
+
+# ---- Resourcepack met de 3D-kronen en 3D-hoeden (CosmeticsPack.zip) ----
+# Zet het zip-bestand ergens online waar een directe download-link is (bv. een GitHub release of raw-link)
+# en vul hier de link en de sha1 in (staat in CosmeticsPack.sha1). Spelers krijgen het pack bij het joinen.
+# Zonder pack zien spelers een gewone helm (goud, ijzer, ...) in plaats van de 3D-versie.
+pack:
+  # Het pack staat al in deze map op GitHub. Vul hieronder je eigen gebruikersnaam en repo-naam in:
+  #   https://raw.githubusercontent.com/JOUWNAAM/JOUWREPO/main/CosmeticsPack.zip
+  # (de repository moet publiek zijn, anders kan Minecraft het niet downloaden)
+  url: ""                  # directe download-link naar CosmeticsPack.zip. Leeg = de plugin stuurt niets
+  sha1: "91a3f4f28a62c9583e92439e00285767e34d18c7"   # hoort bij het meegeleverde CosmeticsPack.zip; leeg laten mag ook
+  verplicht: false         # true = spelers die het pack weigeren worden gekickt (vanilla-gedrag)
+  stuur-bij-join: true
+  bericht: "Voor de 3D-kronen en 3D-hoeden heb je dit resourcepack nodig."
+  # true = jij stuurt het pack al op een andere manier (server.properties, Velocity, andere plugin).
+  # De plugin gaat dan uit van het 3D-model voor iedereen.
+  extern: false
+
+# ---- Gedeelde database: dezelfde cosmetics op lobby en survival ----
+# Zet dit op BEIDE servers aan, met dezelfde database en tabel. Wat je kiest of krijgt staat dan overal gelijk.
+# Het werkt met MySQL of MariaDB. De plugin maakt de tabel zelf aan. Zonder database blijft alles lokaal (spelers.yml).
+# Let op: zet het wachtwoord alleen in de config op de server zelf, nooit in GitHub.
+database:
+  aan: false
+  host: "localhost"
+  poort: 3306
+  naam: "minecraft"
+  gebruiker: ""
+  wachtwoord: ""
+  tabel: "cosmetics_spelers"
+  controle-ticks: 100      # hoe vaak er naar wijzigingen van de andere server gekeken wordt (100 = 5 sec)
+
+hoeden:
+  # false (aanbevolen) = je ziet je eigen hoed niet in je inventaris of in F5, maar iedereen anders wel.
+  #   Er komt dan niets in je helm-slot, dus niets om te pakken of te dupliceren.
+  # true = je ziet je eigen hoed ook, maar de client toont hem dan als item in je helm-slot (dupe-risico in creative).
+  zelf-zien: false
+  afstand: 64             # tot hoever mensen jouw hoed zien (blokken). 0 = overal
+  ververs-ticks: 20        # hoe vaak de hoed opnieuw gestuurd wordt (20 = 1 sec)
+
+# Kill-effecten. Dit zijn de grenzen voor de hele server: een speler kiest in zijn eigen menu
+# (Kill-effecten > Aanpassen) of het effect bij spelers en/of bij mobs werkt.
+# Zet je hier iets op false, dan werkt het voor niemand meer.
+kill-effecten:
+  bij-spelers: true
+  bij-mobs: true
+
+boog-effecten:
+  interval-ticks: 1        # hoe vaak de pijl gecontroleerd wordt (1 = elke tick, aanbevolen)
+  max-levensduur-ticks: 200
+  max-actief: 200          # maximaal aantal pijlen met een spoor tegelijk

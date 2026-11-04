@@ -1,0 +1,21 @@
+name: Cosmetics
+version: '1.2.0'
+main: nl.cosmetics.CosmeticsPlugin
+api-version: '26.1'
+description: 'Kronen en hoeden in 3D, kill-effecten en boog-effecten met een menu voor spelers en een staff-menu'
+commands:
+  cosmetics:
+    description: 'Open je cosmetics-menu'
+    usage: '/cosmetics [pack]'
+    aliases: [cosmetica, cosmetic, cos]
+  cosmeticsadmin:
+    description: 'Staff: cosmetics geven, afpakken, bekijken en effecten testen'
+    usage: '/cosmeticsadmin [geef|neem|lijst|reset|effect|pack|reload]'
+    aliases: [cosadmin, cadmin]
+permissions:
+  cosmetics.use:
+    description: 'Mag het cosmetics-menu openen (je ziet daarin alleen wat je bezit)'
+    default: false
+  cosmetics.staff:
+    description: 'Staff-menu en /cosmeticsadmin: cosmetics geven en afpakken'
+    default: op
